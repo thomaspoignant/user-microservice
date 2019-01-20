@@ -1,5 +1,5 @@
 # USER microservice
- ![Build Status](https://travis-ci.org/thomaspoignant/user-microservice.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/thomaspoignant/user-microservice/badge.svg?branch=master)](https://coveralls.io/github/thomaspoignant/user-microservice?branch=dev)
+ ![Build Status](https://travis-ci.org/thomaspoignant/user-microservice.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/thomaspoignant/user-microservice/badge.svg?branch=master)](https://coveralls.io/github/thomaspoignant/user-microservice?branch=master)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fthomaspoignant%2Fuser-microservice.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fthomaspoignant%2Fuser-microservice?ref=badge_shield)
 
 
 *user-microservice* is a set of API to manage users.  
