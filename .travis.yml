@@ -12,4 +12,5 @@ before_install:
   - make deps
 script:
   - make continuous-integration
-  - $GOPATH/bin/goveralls -service=travis-ci
+  - go test ./... -tags=integration -covermode=count -coverprofile=profile.cov
+  - $GOPATH/bin/goveralls -coverprofile=profile.cov -service=travis-ci
