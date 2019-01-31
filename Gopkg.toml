@@ -1,0 +1,19 @@
+[[constraint]]
+  name = "github.com/awslabs/aws-lambda-go-api-proxy"
+  version = "0.2.0"
+
+[[constraint]]
+  name = "github.com/sirupsen/logrus"
+  version = "1.2.0"
+
+[[constraint]]
+  name = "github.com/gin-gonic/gin"
+  branch= "master"
+
+
+[prune]
+  go-tests = true
+  unused-packages = true
+
+
+

@@ -1,0 +1,15 @@
+language: go
+go:
+  - "1.11"
+services:
+  - docker
+before_install:
+  - export AWS_ACCESS_KEY_ID=FakeAccessKeyId
+  - export AWS_SECRET_ACCESS_KEY=FakeSecretAccessKey
+  - export AWS_DEFAULT_REGION=eu-west-1
+  - docker run -d -p 9000:8000 amazon/dynamodb-local
+  - go get github.com/mattn/goveralls
+  - make deps
+script:
+  - make continuous-integration
+  - $GOPATH/bin/goveralls -service=travis-ci
