@@ -12,17 +12,17 @@ BINARY_NAME=user-microservice
 all: clean build lint tool test
 
 test:
-	$(GOTEST) -v -short ./...
+	$(GOTEST) -short -mod=vendor ./... 
 
 test-integration: 
 	export GIN_MODE=release \
-	&& $(GOTEST) -v -short ./... -tags=integration
+	&& $(GOTEST) -short -tags=integration  -mod=vendor ./...
 
 build: deps
-	$(GOBUILD) -v .
+	$(GOBUILD) -mod=vendor . 
 
 build-linux: deps
-	GOOS=linux $(GOBUILD) -v .
+	GOOS=linux $(GOBUILD) -mod=vendor . 
 
 tool:
 	$(GOVET) ./...; true
@@ -45,9 +45,7 @@ generate-swagger:
 	swag init
 
 deps: generate-swagger
-	$(GOGET) github.com/golang/dep/cmd/dep
-	$(GOGET) golang.org/x/lint/golint
-	dep ensure
+	go mod vendor
 
 docker-build: build-linux
 	docker build -t $(BINARY_NAME) .
