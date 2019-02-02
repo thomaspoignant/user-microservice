@@ -38,6 +38,7 @@ clean:
 	rm -f $(BINARY_NAME)
 
 lint:
+	$(GOGET) golang.org/x/lint/golint
 	$(GOLINT) -set_exit_status $($(GOCMD) list ./... | grep -v /vendor/)
 
 generate-swagger:
