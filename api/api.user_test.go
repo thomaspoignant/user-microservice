@@ -230,7 +230,7 @@ func (suite *UserAPISuite) Test_insert_user_and_update_it() {
 }
 
 func (suite *UserAPISuite) Test_delete_invalid_id() {
-	c := testingUtils.PerformHTTPRequest(router, "GET", "/v1/user/f831b13d-8227-47b3-a17e-f229d3b69335", nil)
+	c := testingUtils.PerformHTTPRequest(router, "DELETE", "/v1/user/f831b13d-8227-47b3-a17e-f229d3b69335", nil)
 	suite.Equal(http.StatusNotFound, c.Code)
 }
 
