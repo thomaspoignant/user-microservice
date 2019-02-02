@@ -8,10 +8,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type conf struct {
-	GinMode string `yaml:"GIN_MODE"`
-}
-
 // TestConfigLocal is testing that we read the value from the config file (config.default.yaml)
 func TestConfigLocal(t *testing.T) {
 	cleanEnvVarForLoadingConfigFile()
@@ -43,17 +39,6 @@ func TestConfigReleaseNoValueUsingDefault(t *testing.T) {
 	os.Setenv("ENV", "DEV")
 	envVarName := "APP_PORT"
 	expected := "8080"
-	LoadConfigFile()
-	got := viper.GetString(envVarName)
-	assert.Equal(t, expected, got)
-}
-
-// TestConfigFileForTest is testing we are using a specific file for tests
-func TestConfigFileForTest(t *testing.T) {
-	cleanEnvVarForLoadingConfigFile()
-	envVarName := "RUNNING_MODE"
-	expected := "test"
-	os.Setenv("TEST", "true")
 	LoadConfigFile()
 	got := viper.GetString(envVarName)
 	assert.Equal(t, expected, got)
