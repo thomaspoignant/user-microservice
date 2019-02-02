@@ -4,6 +4,7 @@ go:
 services:
   - docker
 before_install:
+  - export GO111MODULE=on
   - export AWS_ACCESS_KEY_ID=FakeAccessKeyId
   - export AWS_SECRET_ACCESS_KEY=FakeSecretAccessKey
   - export AWS_DEFAULT_REGION=eu-west-1
