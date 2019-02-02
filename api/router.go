@@ -30,8 +30,6 @@ func SetupRouter() *gin.Engine {
 		userGroup := v1.Group("user")
 		{
 			userController := NewUserController()
-			//TODO : mettre les bonnes méthodes en face
-			//userGroup.GET("/", userController.GetByID)
 			userGroup.GET("/:id", userController.GetByID)
 			userGroup.POST("/", userController.Create)
 			userGroup.PUT("/:id", userController.CompleteUpdate)
