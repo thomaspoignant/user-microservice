@@ -18,10 +18,10 @@ test-integration:
 	export GIN_MODE=release \
 	&& $(GOTEST) -short -tags=integration  -mod=vendor ./...
 
-build: deps
+build: ensure
 	$(GOBUILD) -mod=vendor . 
 
-build-linux: deps
+build-linux: ensure
 	GOOS=linux $(GOBUILD) -mod=vendor . 
 
 tool:
@@ -45,7 +45,7 @@ generate-swagger:
 	$(GOGET) github.com/swaggo/swag/cmd/swag
 	swag init
 
-deps: generate-swagger
+ensure: generate-swagger
 	go mod vendor
 
 docker-build: build-linux
@@ -54,7 +54,7 @@ docker-build: build-linux
 run-as-lambda: build-linux
 	sam local start-api
 
-continuous-integration: deps build lint tool test-integration coverage
+continuous-integration: ensure build lint tool test-integration coverage
 
 
 help:
@@ -62,6 +62,6 @@ help:
 	@echo "make tool: run specified go tool"
 	@echo "make lint: golint ./..."
 	@echo "make clean: remove object files and cached files"
-	@echo "make deps: get the deployment tools"
+	@echo "make ensure: get the deployment tools"
 	@echo "make coverage: get the coverage of my files"
 	@echo "make docker-build: build a docker image and run the container"
