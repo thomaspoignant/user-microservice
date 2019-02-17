@@ -230,6 +230,11 @@ func (suite *UserAPISuite) Test_insert_user_and_update_it() {
 }
 
 func (suite *UserAPISuite) Test_delete_invalid_id() {
+	c := testingUtils.PerformHTTPRequest(router, "DELETE", "/v1/user/f831b13d-8227-b3-a17e-f229d3b69335", nil)
+	suite.Equal(http.StatusBadRequest, c.Code)
+}
+
+func (suite *UserAPISuite) Test_delete_not_found_id() {
 	c := testingUtils.PerformHTTPRequest(router, "DELETE", "/v1/user/f831b13d-8227-47b3-a17e-f229d3b69335", nil)
 	suite.Equal(http.StatusNotFound, c.Code)
 }
@@ -270,7 +275,7 @@ func (suite *UserAPISuite) Test_insert_user_and_patch_it() {
 	suite.Equal(inserted.ID, updated.ID)
 }
 
-func (suite *UserAPISuite) Test_patch_invalid_id() {
+func (suite *UserAPISuite) Test_patch_not_found_id() {
 	updatedUser := dto.UserDto{
 		Email: "john.doe@example.com",
 	}
@@ -279,4 +284,15 @@ func (suite *UserAPISuite) Test_patch_invalid_id() {
 
 	c := testingUtils.PerformHTTPRequest(router, "PATCH", "/v1/user/f831b13d-8227-47b3-a17e-f229d3b69335", requestReader)
 	suite.Equal(http.StatusNotFound, c.Code)
+}
+
+func (suite *UserAPISuite) Test_patch_invalid_id() {
+	updatedUser := dto.UserDto{
+		Email: "john.doe@example.com",
+	}
+	requestByte, _ := json.Marshal(updatedUser)
+	requestReader := bytes.NewReader(requestByte)
+
+	c := testingUtils.PerformHTTPRequest(router, "PATCH", "/v1/user/f831b13d-8227-b3-a17e-f229d3b69335", requestReader)
+	suite.Equal(http.StatusBadRequest, c.Code)
 }
