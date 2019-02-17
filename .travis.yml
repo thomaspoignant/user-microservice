@@ -10,7 +10,7 @@ before_install:
   - export AWS_DEFAULT_REGION=eu-west-1
   - docker run -d -p 9000:8000 amazon/dynamodb-local
   - go get github.com/mattn/goveralls
-  - make deps
+  - make ensure
 script:
   - make continuous-integration
   - go test ./... -tags=integration -covermode=count -coverprofile=profile.cov
